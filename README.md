@@ -1,6 +1,6 @@
 Benchmark Tool for HTTP server
 =========
-A replacement for Apache Benchmark.
+An alternative to Apache Benchmark.
 
 Usage
 =========

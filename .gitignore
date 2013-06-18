@@ -1,5 +1,5 @@
-./target
-*.iml
-./project/target
-./project/project/target
-./.idea
+/target
+/*.iml
+/project/target
+/project/project/target
+/.idea

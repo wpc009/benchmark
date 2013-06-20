@@ -73,16 +73,16 @@ class Monitor(c: Config) extends Actor {
             if(finishedCt == c.concurrent){
                 println("Done..")
                 var failed = 0;
-                results.foldLeft(0L){(v,e) => if(e == -1){ failed+=1;v}else{v+e;}};
-                val succeed = results.filter(p => p != -1);
+                results.foldLeft(0L){(v,e) => if(e == -1){ failed+=1;v}else{v+e;}}
+                val succeed = results.filter(p => p != -1)
                 var max=0L;
                 val sum = succeed.foldLeft(0L){(v,e) => max=if(max>e){max}else{e};v+e;}
                 val mean = sum / succeed.length
                 val varience = Math.sqrt(succeed.foldLeft(0.0){(v,e) => v+Math.pow(e-mean,2.0);}) / succeed.length
-                println(s"response time : mean:$mean  max:$max variance: ${varience}");
+                println(s"response time : mean:$mean  max:$max variance: ${varience}")
                 println(s"succeed: ${succeed.length}/${profile.size} ${succeed.length.toDouble/ profile.size
-                    .toDouble}");
-                context.system.shutdown();
+                    .toDouble}")
+                context.system.shutdown()
             }
         case HttpClient.Connected =>
             log.info("httpclient connected. Start requesting....")
@@ -94,5 +94,5 @@ class Monitor(c: Config) extends Actor {
 
 
 object Monitor {
-    val urlPattern = """http://([\w\.]+)(:[0-9]+)?(.*)?""".r
+    val urlPattern = """http://([\w\.]+)(?::([0-9]+))?(.*)?""".r
 }
